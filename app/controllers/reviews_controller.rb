@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   end
 
   def create 
-    @review = @product.reviews.build(review_params)
+    @review = @product.review.build(review_params)
     @review.user_id = current_user.id
 
     if @review.save
