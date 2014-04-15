@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_filter :load_product
   before_filter :ensure_logged_in, :only => [:edit, :create, :show, :update, :destroy]
   
   def show
@@ -6,13 +7,14 @@ class ReviewsController < ApplicationController
   end
 
   def create 
-    @review = @product.review.build(review_params)
+    #should be fonud in before_filter @product = Product.find(params[:product_id])
+    @review = @product.reviews.build(review_params)
     @review.user_id = current_user.id
 
     if @review.save
-      redirect_to products_path, notice: 'Review created succesfully'
+      redirect_to product_path(@product), notice: 'Review created succesfully'
     else
-      render :action => :show
+      render :action => 'products/show'
     end
   end
 

@@ -3,21 +3,24 @@
 <%= @product[:name] %>
 <%= @product[:description] %>
 <%= @product.formatted_price %>
-<% if current_user %>
   <h3>Review</h3>
 
   <p>Reviews for <%= @product.name %></p>
   <% @product.reviews.each do |review| %>
     <p>
+      -----------------------------------
+      <br />
+
     <%= review.comment %>
      <br/>
      <% if review.user != nil %>
-       <em> by <%= review.user.name %> </em>
+       <em> by <%= review.user.name %> </em><br />
        Adden on: <%= review.created_at %>
      <% end%>
      </p>
    <%end%>
 
+<% if current_user %>
    <h4> New Review</h4>
 
    <%= form_for([@product, @review]) do |f| %>

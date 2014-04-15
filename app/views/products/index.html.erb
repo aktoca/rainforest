@@ -5,6 +5,7 @@
   <%= product[:description] %>
   <br>
   <%= product.formatted_price %>
-  <br><br>
+  <br> <%= link_to "View", product_path(product[:id])%><br>
+  <br>
 <% end %>
 
